@@ -9,7 +9,7 @@ namespace UnixShell.Commands.LS
         List<File> files = new List<File>();
         List<Directory> directories = new List<Directory>();
 
-        public string lsCommand(string path)
+        public void lsCommand(string path)
         {
             string[] dirs = System.IO.Directory.GetDirectories(path);
             string[] fils = System.IO.Directory.GetFiles(path, "*");
@@ -31,9 +31,7 @@ namespace UnixShell.Commands.LS
                 files.Add(file);
             }
 
-            string output = createOutput();
-
-            return output;
+            displayOutput();
         }
 
         private string regexMatchFileName(string pathFile)
@@ -65,6 +63,11 @@ namespace UnixShell.Commands.LS
             }
 
             return output;
+        }
+
+        private void displayOutput()
+        {
+            Console.WriteLine(createOutput());
         }
     }
 }

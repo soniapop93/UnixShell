@@ -1,5 +1,6 @@
 ﻿using UnixShell.Commands.LS;
 using UnixShell.Commands.PWD;
+using UnixShell.Logic;
 
 public class Program
 {
@@ -43,6 +44,10 @@ public class Program
 
         //PwdCommand pwdCMD = new PwdCommand();
         //Console.WriteLine(pwdCMD.pwdCommand());
+
+
+        Shell sh = new Shell();
+        sh.shell();
 
         Console.WriteLine("------------------------ SCRIPT FINISHED ------------------------");
     }

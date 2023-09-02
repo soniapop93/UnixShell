@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnixShell.Commands.LS;
 
 namespace UnixShell.Logic
 {
@@ -8,6 +9,8 @@ namespace UnixShell.Logic
     {
         readonly string homePath = "C:\\Users\\" + System.Environment.UserName;
         readonly string commandsStr = "";
+
+        LsCommand ls = new LsCommand();
 
         public void shell()
         {
@@ -28,7 +31,7 @@ namespace UnixShell.Logic
                             break;
 
                         case "ls":
-                            //TODO: implement ls
+                            ls.lsCommand(homePath);
                             break;
 
                         case "cd":
@@ -70,6 +73,9 @@ namespace UnixShell.Logic
                         case "pipes":
                             //TODO: implement pipes
                             break;
+
+                        case "exit":
+                            return;
                     }
                 }
                
