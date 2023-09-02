@@ -1,4 +1,5 @@
 ﻿using UnixShell.Commands.LS;
+using UnixShell.Commands.PWD;
 
 public class Program
 {
@@ -14,7 +15,7 @@ public class Program
             
             Functionalities:
             [ ] pwd
-            [ ] ls
+            [X] ls
             [ ] cd
             [ ] cp
             [ ] mv
@@ -35,10 +36,13 @@ public class Program
         Console.WriteLine("------------------------ SCRIPT STARTED ------------------------");
 
 
-        LsCommand lsCMD = new LsCommand();
-        string output = lsCMD.lsCommand(@"");
+        //LsCommand lsCMD = new LsCommand();
+        //string output = lsCMD.lsCommand(@"");
+        //Console.WriteLine(output);
 
-        Console.WriteLine(output);
+
+        //PwdCommand pwdCMD = new PwdCommand();
+        //Console.WriteLine(pwdCMD.pwdCommand());
 
         Console.WriteLine("------------------------ SCRIPT FINISHED ------------------------");
     }
