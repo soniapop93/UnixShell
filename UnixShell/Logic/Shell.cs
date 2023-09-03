@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnixShell.Commands.LS;
+using UnixShell.Commands.MKDIR;
 
 namespace UnixShell.Logic
 {
@@ -11,6 +12,7 @@ namespace UnixShell.Logic
         readonly string commandsStr = "";
 
         LsCommand ls = new LsCommand();
+        MkdirCommand mkdir = new MkdirCommand();
 
         public void shell()
         {
@@ -51,6 +53,7 @@ namespace UnixShell.Logic
                             break;
 
                         case "mkdir":
+                            mkdir.mkdirCommand("", "");
                             //TODO: implement mkdir
                             break;
 
