@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using UnixShell.Commands.ECHO;
 using UnixShell.Commands.LS;
 using UnixShell.Commands.MKDIR;
+using UnixShell.Commands.TOUCH;
 
 namespace UnixShell.Logic
 {
     public class Shell
     {
         readonly string homePath = "C:\\Users\\" + System.Environment.UserName;
-        readonly string commandsStr = "";
+        readonly string commandsStr = String.Join("\n", new List<string> { "ls", "pwd", "cd", "cp", "mv", "rm", "mkdir", "echo", "touch", "cat", "grep", "pipes" });
 
         LsCommand ls = new LsCommand();
         MkdirCommand mkdir = new MkdirCommand();
+        EchoCommand echo = new EchoCommand();
+        TouchCommand touch = new TouchCommand();
 
         public void shell()
         {
@@ -22,10 +23,12 @@ namespace UnixShell.Logic
 
                 if (!String.IsNullOrEmpty(command))
                 {
-                    switch (command)
+                    string[] splittedCommand = command.Split(" ");
+
+                    switch (splittedCommand[0].ToString())
                     {
                         default:
-                            Console.WriteLine("Command was not recognized. Please choose one of the following commands: \\n" + commandsStr);
+                            Console.WriteLine("Command was not recognized. Please choose one of the following commands: \n" + commandsStr);
                             break;
 
                         case "pwd":
@@ -54,15 +57,15 @@ namespace UnixShell.Logic
 
                         case "mkdir":
                             mkdir.mkdirCommand("", "");
-                            //TODO: implement mkdir
+                            
                             break;
 
                         case "echo":
-                            //TODO: implement echo
+                            echo.echoCommand(splittedCommand);
                             break;
 
                         case "touch":
-                            //TODO: implement touch
+                            touch.touchCommand("", "");
                             break;
 
                         case "cat":
