@@ -5,10 +5,9 @@ namespace UnixShell.Commands.CD
 {
     public class CdCommand
     {
-
-        public void cdCommand(string path)
+        public string cdCommand(string path, string folder)
         {
-            
+            return path + "\\" + folder;
         }
     }
 }

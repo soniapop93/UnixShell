@@ -1,4 +1,6 @@
-﻿using UnixShell.Commands.ECHO;
+﻿using UnixShell.Commands.CAT;
+using UnixShell.Commands.CD;
+using UnixShell.Commands.ECHO;
 using UnixShell.Commands.LS;
 using UnixShell.Commands.MKDIR;
 using UnixShell.Commands.TOUCH;
@@ -8,17 +10,22 @@ namespace UnixShell.Logic
     public class Shell
     {
         readonly string homePath = "C:\\Users\\" + System.Environment.UserName;
-        readonly string commandsStr = String.Join("\n", new List<string> { "ls", "pwd", "cd", "cp", "mv", "rm", "mkdir", "echo", "touch", "cat", "grep", "pipes" });
+        readonly string commandsStr = String.Join("\n", new List<string> { "ls", "pwd", "cd", "cp", "mv", "rm", "mkdir", "echo", "touch", "cat", "grep"});
 
         LsCommand ls = new LsCommand();
         MkdirCommand mkdir = new MkdirCommand();
         EchoCommand echo = new EchoCommand();
         TouchCommand touch = new TouchCommand();
+        CatCommand cat = new CatCommand();
+        CdCommand cd = new CdCommand();
 
         public void shell()
         {
+            string path = homePath;
+
             while (true)
             {
+                Console.Write(">> ");
                 string command = userInput();
 
                 if (!String.IsNullOrEmpty(command))
@@ -36,11 +43,11 @@ namespace UnixShell.Logic
                             break;
 
                         case "ls":
-                            ls.lsCommand(homePath);
+                            ls.lsCommand(path);
                             break;
 
                         case "cd":
-                            //TODO: implement cd
+                            path = cd.cdCommand(path, splittedCommand[1]);
                             break;
 
                         case "cp":
@@ -56,8 +63,7 @@ namespace UnixShell.Logic
                             break;
 
                         case "mkdir":
-                            mkdir.mkdirCommand("", "");
-                            
+                            mkdir.mkdirCommand(path, "");
                             break;
 
                         case "echo":
@@ -65,24 +71,21 @@ namespace UnixShell.Logic
                             break;
 
                         case "touch":
-                            touch.touchCommand("", "");
+                            touch.touchCommand(path, splittedCommand);
                             break;
 
                         case "cat":
-                            //TODO: implement cat
+                            cat.catCommand(path, splittedCommand);
                             break;
 
                         case "grep":
                             //TODO: implement grep
                             break;
 
-                        case "pipes":
-                            //TODO: implement pipes
-                            break;
-
                         case "exit":
                             return;
                     }
+                    Console.WriteLine("-------------");
                 }
                
             }

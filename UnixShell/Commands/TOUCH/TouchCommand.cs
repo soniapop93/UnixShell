@@ -5,9 +5,12 @@ namespace UnixShell.Commands.TOUCH
 {
     public class TouchCommand
     {
-        public void touchCommand(string path, string fileName)
+        public void touchCommand(string path, string[] filesNames)
         {
-            using (FileStream fs = File.Create(path + "\\" + fileName));
+            for (int i = 1; i < filesNames.Length; i++)
+            {
+                using (FileStream fs = File.Create(path + "\\" + filesNames[i]));
+            }
         }
     }
 }

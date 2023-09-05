@@ -11,6 +11,9 @@ namespace UnixShell.Commands.LS
 
         public void lsCommand(string path)
         {
+            directories.Clear();
+            files.Clear();
+
             string[] dirs = System.IO.Directory.GetDirectories(path);
             string[] fils = System.IO.Directory.GetFiles(path, "*");
 
@@ -52,14 +55,20 @@ namespace UnixShell.Commands.LS
         {
             string output = "";
 
-            for (int i = 0; i < directories.Count; i++)
+            if (directories.Count > 0)
             {
-                output += directories[i].directoryName + "\n";
+                for (int i = 0; i < directories.Count; i++)
+                {
+                    output += directories[i].directoryName + "\n";
+                }
             }
 
-            for (int i = 0; i < files.Count; i++)
+            if (files.Count > 0)
             {
-                output += files[i].fileName + "\n";
+                for (int i = 0; i < files.Count; i++)
+                {
+                    output += files[i].fileName + "\n";
+                }
             }
 
             return output;
