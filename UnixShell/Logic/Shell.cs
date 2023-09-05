@@ -22,6 +22,7 @@ namespace UnixShell.Logic
         public void shell()
         {
             string path = homePath;
+            string previousPath = homePath;
 
             while (true)
             {
@@ -47,7 +48,13 @@ namespace UnixShell.Logic
                             break;
 
                         case "cd":
+                            previousPath = path;
                             path = cd.cdCommand(path, splittedCommand[1]);
+                            break;
+
+                        case "cd..":
+                            path = previousPath;
+                            //TODO: not finished, is not working properly yet
                             break;
 
                         case "cp":
