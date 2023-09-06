@@ -3,6 +3,7 @@ using UnixShell.Commands.CD;
 using UnixShell.Commands.ECHO;
 using UnixShell.Commands.LS;
 using UnixShell.Commands.MKDIR;
+using UnixShell.Commands.PWD;
 using UnixShell.Commands.TOUCH;
 
 namespace UnixShell.Logic
@@ -18,11 +19,11 @@ namespace UnixShell.Logic
         TouchCommand touch = new TouchCommand();
         CatCommand cat = new CatCommand();
         CdCommand cd = new CdCommand();
+        PwdCommand pwd = new PwdCommand();
 
         public void shell()
         {
             string path = homePath;
-            string previousPath = homePath;
 
             while (true)
             {
@@ -40,7 +41,7 @@ namespace UnixShell.Logic
                             break;
 
                         case "pwd":
-                            //TODO: implement pwd
+                            pwd.pwdCommand(path);
                             break;
 
                         case "ls":
@@ -48,13 +49,17 @@ namespace UnixShell.Logic
                             break;
 
                         case "cd":
-                            previousPath = path;
-                            path = cd.cdCommand(path, splittedCommand[1]);
-                            break;
-
-                        case "cd..":
-                            path = previousPath;
-                            //TODO: not finished, is not working properly yet
+                            if (splittedCommand.Length > 1)
+                            {
+                                if (splittedCommand[1].Equals(".."))
+                                {
+                                    path = cd.cdPreviousFolder(path);
+                                }
+                                else
+                                {
+                                    path = cd.cdCommand(path, splittedCommand[1]);
+                                }
+                            }
                             break;
 
                         case "cp":

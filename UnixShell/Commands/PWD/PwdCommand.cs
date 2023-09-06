@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace UnixShell.Commands.PWD
 {
     public class PwdCommand
     {
-        public string pwdCommand()
+        public void pwdCommand(string path)
         {
-            return Directory.GetCurrentDirectory();
+            Console.WriteLine(path);
         }
     }
 }

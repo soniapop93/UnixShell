@@ -9,5 +9,12 @@ namespace UnixShell.Commands.CD
         {
             return path + "\\" + folder;
         }
+
+        public string cdPreviousFolder(string path)
+        {
+            DirectoryInfo dirInfo = Directory.GetParent(path);
+
+            return dirInfo.FullName;
+        }
     }
 }

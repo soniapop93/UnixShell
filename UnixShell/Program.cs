@@ -15,16 +15,16 @@ public class Program
             execute it from.
             
             Functionalities:
-            [ ] pwd
+            [X] pwd
             [X] ls
-            [ ] cd
+            [X] cd
             [ ] cp
             [ ] mv
             [ ] rm
-            [ ] mkdir
-            [ ] echo
-            [ ] touch
-            [ ] cat
+            [X] mkdir
+            [X] echo
+            [X] touch
+            [X] cat
             [ ] grep
             [ ] pipes
             
