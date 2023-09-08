@@ -4,6 +4,7 @@ using UnixShell.Commands.CP;
 using UnixShell.Commands.ECHO;
 using UnixShell.Commands.LS;
 using UnixShell.Commands.MKDIR;
+using UnixShell.Commands.MV;
 using UnixShell.Commands.PWD;
 using UnixShell.Commands.TOUCH;
 
@@ -22,6 +23,7 @@ namespace UnixShell.Logic
         CdCommand cd = new CdCommand();
         PwdCommand pwd = new PwdCommand();
         CpCommand cp = new CpCommand();
+        MvCommand mv = new MvCommand();
 
         public void shell()
         {
@@ -65,6 +67,7 @@ namespace UnixShell.Logic
                             break;
 
                         case "cp":
+
                             if (splittedCommand.Length == 3)
                             {
                                 cp.cpCommand(path ,splittedCommand[1], splittedCommand[2]);
@@ -73,7 +76,11 @@ namespace UnixShell.Logic
                             break;
 
                         case "mv":
-                            //TODO: implement mv
+                            
+                            if (splittedCommand.Length == 3)
+                            {
+                                mv.mvCommand(path, splittedCommand[1], splittedCommand[2]);
+                            }
                             break;
 
                         case "rm":
@@ -81,7 +88,10 @@ namespace UnixShell.Logic
                             break;
 
                         case "mkdir":
-                            mkdir.mkdirCommand(path, "");
+                            if (splittedCommand.Length == 2)
+                            {
+                                mkdir.mkdirCommand(path, splittedCommand[1]);
+                            }
                             break;
 
                         case "echo":

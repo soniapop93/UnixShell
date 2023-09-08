@@ -19,7 +19,7 @@ public class Program
             [X] ls
             [X] cd
             [ ] cp
-            [ ] mv
+            [X] mv
             [ ] rm
             [X] mkdir
             [X] echo
