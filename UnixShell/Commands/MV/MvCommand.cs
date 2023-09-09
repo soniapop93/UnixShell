@@ -4,16 +4,9 @@ namespace UnixShell.Commands.MV
 {
     public class MvCommand
     {
-        public void mvCommand(string path, string fileName, string newPath)
+        public void mvCommand(string path, string currentfileName, string newFileName)
         {
-            if (newPath.Contains("\\")) 
-            {
-                File.Move(Path.Combine(path, fileName), Path.Combine(newPath, fileName));
-            }
-            else
-            {
-                File.Move(Path.Combine(path, fileName), Path.Combine(path, newPath));
-            }
+            File.Move(Path.Combine(path, currentfileName), Path.Combine(path, newFileName));
         }
     }
 }
