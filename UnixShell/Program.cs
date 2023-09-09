@@ -18,7 +18,7 @@ public class Program
             [X] pwd
             [X] ls
             [X] cd
-            [ ] cp
+            [X] cp
             [X] mv
             [ ] rm
             [X] mkdir

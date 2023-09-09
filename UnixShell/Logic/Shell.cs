@@ -71,7 +71,6 @@ namespace UnixShell.Logic
                             if (splittedCommand.Length == 3)
                             {
                                 cp.cpCommand(path ,splittedCommand[1], splittedCommand[2]);
-                                //TODO: not finished yet
                             }
                             break;
 
