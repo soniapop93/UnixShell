@@ -20,7 +20,7 @@ public class Program
             [X] cd
             [X] cp
             [X] mv
-            [ ] rm
+            [X] rm
             [X] mkdir
             [X] echo
             [X] touch
@@ -35,16 +35,6 @@ public class Program
         */
 
         Console.WriteLine("------------------------ SCRIPT STARTED ------------------------");
-
-
-        //LsCommand lsCMD = new LsCommand();
-        //string output = lsCMD.lsCommand(@"");
-        //Console.WriteLine(output);
-
-
-        //PwdCommand pwdCMD = new PwdCommand();
-        //Console.WriteLine(pwdCMD.pwdCommand());
-
 
         Shell sh = new Shell();
         sh.shell();

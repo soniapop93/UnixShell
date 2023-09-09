@@ -6,6 +6,7 @@ using UnixShell.Commands.LS;
 using UnixShell.Commands.MKDIR;
 using UnixShell.Commands.MV;
 using UnixShell.Commands.PWD;
+using UnixShell.Commands.RM;
 using UnixShell.Commands.TOUCH;
 
 namespace UnixShell.Logic
@@ -24,6 +25,7 @@ namespace UnixShell.Logic
         PwdCommand pwd = new PwdCommand();
         CpCommand cp = new CpCommand();
         MvCommand mv = new MvCommand();
+        RmCommand rm = new RmCommand();
 
         public void shell()
         {
@@ -67,7 +69,6 @@ namespace UnixShell.Logic
                             break;
 
                         case "cp":
-
                             if (splittedCommand.Length == 3)
                             {
                                 cp.cpCommand(path ,splittedCommand[1], splittedCommand[2]);
@@ -75,7 +76,6 @@ namespace UnixShell.Logic
                             break;
 
                         case "mv":
-                            
                             if (splittedCommand.Length == 3)
                             {
                                 mv.mvCommand(path, splittedCommand[1], splittedCommand[2]);
@@ -83,7 +83,15 @@ namespace UnixShell.Logic
                             break;
 
                         case "rm":
-                            //TODO: implememnt rm
+                            if (splittedCommand.Length == 2 && !splittedCommand[1].Contains("-rf"))
+                            {
+                                rm.rmCommand(false, path, splittedCommand[1]);
+                            }
+                            else if (splittedCommand.Length == 3 && splittedCommand[1].Contains("-rf"))
+                            {
+                                rm.rmCommand(true, path, splittedCommand[2]);
+                            } 
+
                             break;
 
                         case "mkdir":
