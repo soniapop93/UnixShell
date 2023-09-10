@@ -8,6 +8,7 @@ using UnixShell.Commands.MV;
 using UnixShell.Commands.PWD;
 using UnixShell.Commands.RM;
 using UnixShell.Commands.TOUCH;
+using System.Text.RegularExpressions;
 
 namespace UnixShell.Logic
 {
@@ -38,9 +39,12 @@ namespace UnixShell.Logic
 
                 if (!String.IsNullOrEmpty(command))
                 {
-                    string[] splittedCommand = command.Split(" ");
+                    string commandItem = command.Split(" ")[0].Trim();
+                    List<string> paramsCommandslist = matchParams(command);
 
-                    switch (splittedCommand[0].ToString())
+                    //string[] splittedCommand = command.Split(" ");
+
+                    switch (commandItem)
                     {
                         default:
                             Console.WriteLine("Command was not recognized. Please choose one of the following commands: \n" + commandsStr);
@@ -55,7 +59,7 @@ namespace UnixShell.Logic
                             break;
 
                         case "cd":
-                            if (splittedCommand.Length > 1)
+                            if (paramsCommandslist.Count > 1)
                             {
                                 if (splittedCommand[1].Equals(".."))
                                 {
@@ -114,7 +118,7 @@ namespace UnixShell.Logic
                             break;
 
                         case "grep":
-                            //TODO: implement grep
+                            //TODO: implement logic
                             break;
 
                         case "exit":
@@ -131,6 +135,20 @@ namespace UnixShell.Logic
             string inputUser = Console.ReadLine();
 
             return inputUser;
-        } 
+        }
+
+        public List<string> matchParams(string input)
+        {
+            List<string> items = new List<string>();
+
+            MatchCollection m = Regex.Matches(input, @"""(.*?)""");
+
+            for (int i = 0; i < m.Count; i++)
+            {
+                items.Add(m[i].Groups[1].Value);
+            }
+
+            return items;
+        }
     }
 }

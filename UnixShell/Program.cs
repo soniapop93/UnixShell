@@ -37,7 +37,9 @@ public class Program
         Console.WriteLine("------------------------ SCRIPT STARTED ------------------------");
 
         Shell sh = new Shell();
-        sh.shell();
+        //sh.shell();
+
+        sh.matchParams("mkdir \"testing\" \"test\"");
 
         Console.WriteLine("------------------------ SCRIPT FINISHED ------------------------");
     }
