@@ -41,9 +41,20 @@ namespace UnixShell.Logic
                 {
                     string commandItem = "";
 
-                    if (command.Contains("cd .."))
+                    if (command.Contains("cd "))
                     {
-                        commandItem = "cd ..";
+                        if (command.Contains("cd .."))
+                        {
+                            commandItem = "cd ..";
+                        }
+                        else
+                        {
+                            commandItem = "cd";
+                        }
+                    }
+                    else if (command.Contains("rm") && command.Contains("-rf"))
+                    {
+                        commandItem = "rm -rf";
                     }
                     else
                     {
@@ -89,15 +100,12 @@ namespace UnixShell.Logic
                             break;
 
                         case "rm":
-                            if (paramsCommandslist.Count == 1 && !paramsCommandslist[1].Contains("-rf"))
-                            {
-                                rm.rmCommand(false, path, paramsCommandslist[1]);
-                            }
-                            else if (paramsCommandslist.Count == 3 && paramsCommandslist[1].Contains("-rf"))
-                            {
-                                rm.rmCommand(true, path, paramsCommandslist[2]);
-                            } 
-                            //TODO: fix it
+                            rm.rmCommand(false, path, paramsCommandslist[0]);
+                            break;
+
+                        case "rm -rf":
+                            rm.rmCommand(true, path, paramsCommandslist[0]);
+
                             break;
 
                         case "mkdir":
