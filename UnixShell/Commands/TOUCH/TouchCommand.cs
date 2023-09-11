@@ -7,7 +7,7 @@ namespace UnixShell.Commands.TOUCH
     {
         public void touchCommand(string path, string[] filesNames)
         {
-            for (int i = 1; i < filesNames.Length; i++)
+            for (int i = 0; i < filesNames.Length; i++)
             {
                 using (FileStream fs = File.Create(path + "\\" + filesNames[i]));
             }

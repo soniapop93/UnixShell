@@ -39,10 +39,18 @@ namespace UnixShell.Logic
 
                 if (!String.IsNullOrEmpty(command))
                 {
-                    string commandItem = command.Split(" ")[0].Trim();
-                    List<string> paramsCommandslist = matchParams(command);
+                    string commandItem = "";
 
-                    //string[] splittedCommand = command.Split(" ");
+                    if (command.Contains("cd .."))
+                    {
+                        commandItem = "cd ..";
+                    }
+                    else
+                    {
+                        commandItem = command.Split(" ")[0].Trim();
+                    }
+
+                    List<string> paramsCommandslist = matchParams(command);
 
                     switch (commandItem)
                     {
@@ -59,62 +67,56 @@ namespace UnixShell.Logic
                             break;
 
                         case "cd":
-                            if (paramsCommandslist.Count > 1)
-                            {
-                                if (splittedCommand[1].Equals(".."))
-                                {
-                                    path = cd.cdPreviousFolder(path);
-                                }
-                                else
-                                {
-                                    path = cd.cdCommand(path, splittedCommand[1]);
-                                }
-                            }
+                            path = cd.cdCommand(path, paramsCommandslist[0]);
+                            break;
+
+                        case "cd ..":
+                            path = cd.cdPreviousFolder(path);
                             break;
 
                         case "cp":
-                            if (splittedCommand.Length == 3)
+                            if (paramsCommandslist.Count == 2)
                             {
-                                cp.cpCommand(path ,splittedCommand[1], splittedCommand[2]);
+                                cp.cpCommand(path , paramsCommandslist[0], paramsCommandslist[1]);
                             }
                             break;
 
                         case "mv":
-                            if (splittedCommand.Length == 3)
+                            if (paramsCommandslist.Count == 2)
                             {
-                                mv.mvCommand(path, splittedCommand[1], splittedCommand[2]);
+                                mv.mvCommand(path, paramsCommandslist[0], paramsCommandslist[1]);
                             }
                             break;
 
                         case "rm":
-                            if (splittedCommand.Length == 2 && !splittedCommand[1].Contains("-rf"))
+                            if (paramsCommandslist.Count == 1 && !paramsCommandslist[1].Contains("-rf"))
                             {
-                                rm.rmCommand(false, path, splittedCommand[1]);
+                                rm.rmCommand(false, path, paramsCommandslist[1]);
                             }
-                            else if (splittedCommand.Length == 3 && splittedCommand[1].Contains("-rf"))
+                            else if (paramsCommandslist.Count == 3 && paramsCommandslist[1].Contains("-rf"))
                             {
-                                rm.rmCommand(true, path, splittedCommand[2]);
+                                rm.rmCommand(true, path, paramsCommandslist[2]);
                             } 
-
+                            //TODO: fix it
                             break;
 
                         case "mkdir":
-                            if (splittedCommand.Length == 2)
+                            if (paramsCommandslist.Count == 1)
                             {
-                                mkdir.mkdirCommand(path, splittedCommand[1]);
+                                mkdir.mkdirCommand(path, paramsCommandslist[0]);
                             }
                             break;
 
                         case "echo":
-                            echo.echoCommand(splittedCommand);
+                            echo.echoCommand(paramsCommandslist.ToArray());
                             break;
 
                         case "touch":
-                            touch.touchCommand(path, splittedCommand);
+                            touch.touchCommand(path, paramsCommandslist.ToArray());
                             break;
 
                         case "cat":
-                            cat.catCommand(path, splittedCommand);
+                            cat.catCommand(path, paramsCommandslist.ToArray());
                             break;
 
                         case "grep":
@@ -137,7 +139,7 @@ namespace UnixShell.Logic
             return inputUser;
         }
 
-        public List<string> matchParams(string input)
+        private List<string> matchParams(string input)
         {
             List<string> items = new List<string>();
 

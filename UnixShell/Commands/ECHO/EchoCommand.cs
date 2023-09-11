@@ -9,7 +9,7 @@ namespace UnixShell.Commands.ECHO
         {
             if (splittedCommand.Length > 1)
             {
-                Console.WriteLine(String.Join(" ", splittedCommand, 1, splittedCommand.Length - 1));
+                Console.WriteLine(String.Join(" ", splittedCommand));
             }
         }
     }

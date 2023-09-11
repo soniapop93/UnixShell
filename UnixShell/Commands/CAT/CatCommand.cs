@@ -7,7 +7,7 @@ namespace UnixShell.Commands.CAT
     {
         public void catCommand(string path, string[] files)
         {
-            for (int i = 1; i < files.Length; i++)
+            for (int i = 0; i < files.Length; i++)
             {
                 Console.WriteLine(File.ReadAllText(path + "//" + files[i]));
             }
