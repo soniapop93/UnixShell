@@ -25,7 +25,7 @@ public class Program
             [X] echo
             [X] touch
             [X] cat
-            [ ] grep
+            [X] grep
             [ ] pipes
             
             The program should act like a normal shell where you run commands.

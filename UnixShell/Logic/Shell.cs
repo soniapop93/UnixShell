@@ -9,6 +9,7 @@ using UnixShell.Commands.PWD;
 using UnixShell.Commands.RM;
 using UnixShell.Commands.TOUCH;
 using System.Text.RegularExpressions;
+using UnixShell.Commands.GREP;
 
 namespace UnixShell.Logic
 {
@@ -27,6 +28,7 @@ namespace UnixShell.Logic
         CpCommand cp = new CpCommand();
         MvCommand mv = new MvCommand();
         RmCommand rm = new RmCommand();
+        GrepCommand grep = new GrepCommand();
 
         public void shell()
         {
@@ -128,7 +130,7 @@ namespace UnixShell.Logic
                             break;
 
                         case "grep":
-                            //TODO: implement logic
+                            grep.grepCommand(path, paramsCommandslist[1], paramsCommandslist[0]);
                             break;
 
                         case "exit":
